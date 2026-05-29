@@ -1,0 +1,5 @@
+Summary for Shashank:
+- 5+ years backend engineering experience
+- Specializes in distributed systems
+- Key skills: Java, Spring Boot, Kafka, SQL, Python, GenAI, Cloud, Docker, K8s
+- Expertise in backend architecture and cloud-native development
