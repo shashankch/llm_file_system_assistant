@@ -1,0 +1,3 @@
+Alex Kumar
+Python, Machine Learning, LangChain
+Built RAG systems.

@@ -1,0 +1,4 @@
+Shashank
+Java, Spring Boot, Kafka, Sql, Python, GenAI, Cloud, Docker, K8s
+5+ years of backend engineering experience.
+Distributed systems backend engineer.
