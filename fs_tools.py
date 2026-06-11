@@ -121,9 +121,16 @@ def write_file(filepath: str, content: str) -> Dict:
         return {"success": False, "error": str(e)}
 
 
-def search_in_file(filepath: str, keyword: str) -> Dict:
+def search_in_file(
+    filepath: str,
+    keyword: str,
+    context_size: int = 150,
+    limit: int = 10,
+    offset: int = 0,
+) -> Dict:
     """
     Case-insensitive search with context.
+    Supports adjustable context size and pagination (limit, offset) to prevent overwhelming the user.
     """
 
     file_data = read_file(filepath)
@@ -136,8 +143,7 @@ def search_in_file(filepath: str, keyword: str) -> Dict:
     content_lower = content.lower()
     keyword_lower = keyword.lower()
 
-    matches = []
-
+    all_matches = []
     start = 0
 
     while True:
@@ -146,18 +152,25 @@ def search_in_file(filepath: str, keyword: str) -> Dict:
         if idx == -1:
             break
 
-        context_start = max(0, idx - 75)
+        context_start = max(0, idx - context_size)
+        context_end = min(len(content), idx + len(keyword) + context_size)
 
-        context_end = min(len(content), idx + len(keyword) + 75)
-
-        matches.append({"position": idx, "context": content[context_start:context_end]})
+        all_matches.append({
+            "position": idx,
+            "context": content[context_start:context_end]
+        })
 
         start = idx + len(keyword)
+
+    total_matches = len(all_matches)
+    paginated_matches = all_matches[offset:offset + limit]
 
     return {
         "success": True,
         "keyword": keyword,
-        "total_matches": len(matches),
-        "matches": matches,
+        "total_matches": total_matches,
+        "limit": limit,
+        "offset": offset,
+        "matches": paginated_matches,
         "metadata": file_data["metadata"],
     }

@@ -72,12 +72,31 @@ TOOLS: list[dict[str, Any]] = [
             "description": """
             Search keyword inside file.
             Case insensitive.
+            Supports pagination and adjustable context window size around matches.
             """,
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "filepath": {"type": "string"},
-                    "keyword": {"type": "string"},
+                    "filepath": {
+                        "type": "string",
+                        "description": "Path to the file to search in."
+                    },
+                    "keyword": {
+                        "type": "string",
+                        "description": "The term or phrase to search for."
+                    },
+                    "context_size": {
+                        "type": "integer",
+                        "description": "Number of characters of context to retrieve before and after the keyword match. Defaults to 150."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of matches to return (for pagination). Defaults to 10."
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "description": "Index of the first match to retrieve (for pagination). Defaults to 0."
+                    }
                 },
                 "required": ["filepath", "keyword"],
             },
