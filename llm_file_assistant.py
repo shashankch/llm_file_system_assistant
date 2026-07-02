@@ -9,7 +9,7 @@ from fs_tools import read_file, list_files, write_file, search_in_file
 
 load_dotenv()
 
-MODEL_NAME = "qwen/qwen3-32b"
+MODEL_NAME = "qwen/qwen3.6-27b"
 
 client = OpenAI(api_key=os.getenv("LLM_API_KEY"), base_url=os.getenv("LLM_API_URL"))
 
